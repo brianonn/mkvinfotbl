@@ -170,9 +170,9 @@ def ascii_table(title: str, headers: list[str], rows: list[list[str]]) -> str:
         return "| " + " | ".join(parts) + " |"
 
     sep = "+-" + "-+-".join("-" * w for w in col_widths) + "-+"
-    inner_width = sum(col_widths) + 3 * len(col_widths) - 1
-    title_sep = "+" + "=" * (inner_width + 2) + "+"
-    title_line = "| " + title.center(inner_width) + " |"
+    inner_width = len(sep) - 2          # content width between the two '+' corners
+    title_sep = "+" + "=" * inner_width + "+"
+    title_line = "| " + title.center(inner_width - 2) + " |"
 
     lines = [title_sep, title_line, sep, fmt_row(headers), sep]
     for row in rows:
