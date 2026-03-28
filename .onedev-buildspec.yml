@@ -1,0 +1,22 @@
+version: 44
+jobs:
+- name: Push to Github
+  steps:
+  - type: PushRepository
+    name: push
+    remoteUrl: https://github.com/brianonn/mkvinfotbl.git
+    userName: brianonn
+    passwordSecret: github-access-token
+    force: false
+    condition: SUCCESSFUL
+    optional: false
+  triggers:
+  - type: BranchUpdateTrigger
+    userMatch: anyone
+    projects: brian/mkvinfotbl
+  - type: TagCreateTrigger
+    projects: brian/mkvinfotbl
+  retryCondition: never
+  maxRetries: 3
+  retryDelay: 30
+  timeout: 14400
